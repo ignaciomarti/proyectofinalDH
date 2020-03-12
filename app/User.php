@@ -72,7 +72,10 @@ public function hasRole($role)
 }
 
 public function setNameAttribute($value) {
-    $this->attributes['name'] = trim(preg_replace("/ {2,}/", " ", strtolower($value))); # Paso todo a minúsculas, reemplazo múltiples espacios por uno solo y trimeo los extremos
+    $this->attributes['name'] = trim($value); # Paso todo a minúsculas y trimeo espacios en los extremos
+}
+public function setPasswordAttribute($value) {
+    $this->attributes['password'] = Hash::make($value); # Hasheo la contraseña
 }
 
 }

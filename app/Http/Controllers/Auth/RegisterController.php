@@ -54,15 +54,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'alpha', 'max:50', 'regex:/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ ]*$/'],
+            'name' => ['required', 'string', 'min:3', 'max:50', 'regex:/^\s*[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸ_.-]*\s*$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string','min:8', 'max:255', 'confirmed', new Uppercase, new Lowercase, new Number],
+            'mayor' => ['required', 'accepted'],
             'tos' => ['required', 'accepted'],
         ], $messages = [
-            'password.min' => 'El campo contraseña debe contener al menos :min caracteres.',
-            'password.max' => 'El campo contraseña no debe contener más de :max caracteres.',
+            'name.regex' => 'El campo usuario contiene caracteres inválidos.',
             'password.confirmed' => 'La contraseña no coincide.',
-            'password.required' => 'El campo contraseña es obligatorio.',
+        ], $attributes = [
+            'name' => 'usuario',
+            'password' => 'contraseña',
         ]);
     }
 
@@ -77,7 +79,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => $data['password'],
         ]);
         $user->roles()->attach(Role::where('name', 'user')->first());
         return $user;
