@@ -15,22 +15,23 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique(); #username
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('apellido');
-            $table->integer('telefono');
-            $table->integer('documento');
-            $table->date('fecha_nacimiento');
-            $table->smallInteger('localidad_id');
-            $table->smallInteger('provincia_id');
-            $table->smallInteger('pais_id');
-            $table->string('domicilio');
-            $table->smallInteger('tipo_documento_id');
-            $table->smallInteger('tipo_telefono_id');
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable();
+            $table->integer('telefono')->nullable();
+            $table->integer('documento')->nullable()->unique();
+            $table->date('fecha_nacimiento')->nullable();
+            $table->smallInteger('localidad_id')->nullable();
+            $table->smallInteger('provincia_id')->nullable();
+            $table->smallInteger('pais_id')->nullable();
+            $table->string('domicilio')->nullable();
+            $table->smallInteger('tipo_documento_id')->nullable();
+            $table->smallInteger('tipo_telefono_id')->nullable();
         });
     }
 

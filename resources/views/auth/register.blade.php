@@ -76,21 +76,21 @@
 
                 <!-- Checkbox de Recordarme -->
                 <div class="custom-control custom-checkbox mt-1">
-                    <input name="recordar" type="checkbox" id="recordar_ïd" class="custom-control-input" value="yes">
+                    <input name="remember" type="checkbox" id="remember_id" class="custom-control-input" value="yes" {{ old('remember') ? 'checked' : '' }}>
 
-                    <label for="recordar_id" class="custom-control-label">Recordarme</label>
+                    <label for="remember_id" class="custom-control-label">{{ __('Remember Me') }}</label>
                 </div>
 
                 <!-- Checkbox de Mayor de Edad-->
                 <div class="custom-control custom-checkbox mt-2">
-                    <input name="mayor" type="checkbox" id="mayor_id" class="custom-control-input @error('mayor') is-invalid @enderror" value="yes">
+                    <input name="mayor" type="checkbox" id="mayor_id" class="custom-control-input @error('mayor') is-invalid @enderror" value="yes" {{ old('mayor') ? 'checked' : '' }}>
 
                     <label for="mayor_id" class="custom-control-label @error('mayor') text-danger @enderror">Soy mayor de edad</label>
                 </div>
 
                 <!-- Checkbox de ToS -->
                 <div class="custom-control custom-checkbox mt-2 mb-3">
-                    <input name="tos" type="checkbox" id="tos_id" class="custom-control-input @error('tos') is-invalid @enderror" value="yes" {{--required--}}>
+                    <input name="tos" type="checkbox" id="tos_id" class="custom-control-input @error('tos') is-invalid @enderror" value="yes" {{ old('tos') ? 'checked' : '' }} >
 
                     <label for="tos_id" class="custom-control-label @error('tos') text-danger @enderror">Acepto los Términos y Condiciones del sitio</label>
                 </div>
